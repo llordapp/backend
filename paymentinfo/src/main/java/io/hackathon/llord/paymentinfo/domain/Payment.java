@@ -12,6 +12,8 @@ public class Payment {
 	private String firstName;
 	private String lastName;
 	private String address;
+	private String reference;
+	private String status;
 	
 	private double amount;
 	private String currency;
@@ -21,15 +23,25 @@ public class Payment {
 		
 	}
 
-	public Payment(String firstName, String lastName, String address, double amount, String currency,
+	public Payment(String firstName, String lastName, String address, String reference, String status, double amount, String currency,
 			LocalDateTime requestDate) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
+		this.reference = reference;
+		this.status = status;
 		this.amount = amount;
 		this.currency = currency;
 		this.requestDate = requestDate;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public String getReference() {
+		return reference;
 	}
 
 	public String getId() {
