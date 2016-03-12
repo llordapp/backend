@@ -30,7 +30,7 @@ public class TenantValidatorController {
 //		return impl.findProperty(address);
 //	}
 	
-	@RequestMapping("/property/tenants/")
+	@RequestMapping("/property/tenants")
 	public List<Tenant> findAllTenants() {
 		System.out.println("Finding all tenants");
 		return impl.findAllTenants();
@@ -38,7 +38,7 @@ public class TenantValidatorController {
 
 	// distinct addresses
 	// list of tenants
-	@RequestMapping("/property/")
+	@RequestMapping("/property")
 	public List<Property> findAllProperties() {
 		System.out.println("Finding all properties");
 		return impl.findAllProperties();
