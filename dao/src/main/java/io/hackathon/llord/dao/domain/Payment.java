@@ -1,7 +1,5 @@
 package io.hackathon.llord.dao.domain;
 
-import java.time.LocalDateTime;
-
 import org.springframework.data.annotation.Id;
 
 public class Payment {
@@ -20,6 +18,7 @@ public class Payment {
 	private String currency;	
 	private long requestDate;
 	private long paidDate;
+	private String transactionId;
 	
 	public Payment() {
 		
@@ -38,10 +37,16 @@ public class Payment {
 		this.currency = currency;
 		this.requestDate = requestDate;
 		this.paidDate = 0l;
+		this.transactionId = "";
 	}
 
-	public void update(String status) {
+	public String getTransactionId() {
+		return transactionId;
+	}
+
+	public void update(String status, String transactionId) {
 		this.status = status;
+		this.transactionId = transactionId;
 	}
 
 	public String getImage() {
@@ -92,6 +97,8 @@ public class Payment {
 	public String toString() {
 		return "Payment [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
 				+ ", reference=" + reference + ", status=" + status + ", image=" + image + ", amount=" + amount
-				+ ", currency=" + currency + ", requestDate=" + requestDate + ", paidDate=" + paidDate + "]";
+				+ ", currency=" + currency + ", requestDate=" + requestDate + ", paidDate=" + paidDate
+				+ ", transactionId=" + transactionId + "]";
 	}
+
 }

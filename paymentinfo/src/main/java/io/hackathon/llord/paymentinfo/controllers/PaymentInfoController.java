@@ -47,8 +47,8 @@ public class PaymentInfoController {
 		impl.firstTimeSetup();
 	}
 	
-	@RequestMapping("/{id}/{status}")
-	public Payment updateStatus(@PathVariable String id, @PathVariable String status) {
-		return impl.updateStatus(id, status);
+	@RequestMapping("/{id}/{transactionid}/{status}")
+	public Payment updateStatus(@PathVariable String id, @PathVariable String transactionid, @PathVariable String status) {
+		return impl.updateStatus(id, transactionid, status);
 	}
 }
