@@ -1,28 +1,19 @@
 package io.hackathon.llord.dao.domain;
 
-import org.springframework.data.annotation.Id;
-
 public class Tenant {
-
-	@Id
-	private String tenantId;
+	
 	private String firstName;
 	private String lastName;
-	private String propertyId;
+
 
 	public Tenant() {
 		
 	}
 
-	public Tenant(String firstName, String lastName, String propertyId) {
+	public Tenant(String firstName, String lastName) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.propertyId = propertyId;
-	}
-
-	public String getTenantId() {
-		return tenantId;
 	}
 
 	public String getFirstName() {
@@ -31,9 +22,5 @@ public class Tenant {
 
 	public String getLastName() {
 		return lastName;
-	}
-
-	public String getPropertyId() {
-		return propertyId;
 	}
 }

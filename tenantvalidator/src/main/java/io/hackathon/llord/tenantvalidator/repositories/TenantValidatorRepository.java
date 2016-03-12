@@ -9,7 +9,7 @@ import io.hackathon.llord.dao.domain.Tenant;
 
 @Repository
 public interface TenantValidatorRepository extends MongoRepository<Tenant, String> {
-	public Tenant findTenantById(String tenantId);
+	public Tenant findTenantByTenantId(String tenantId);
 	public List<Tenant> findAll();
-	public List<Tenant> findTentants(String propertyId);
+	public List<Tenant> findTentantsByPropertyId(String propertyId);	
 }
