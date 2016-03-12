@@ -47,6 +47,16 @@ public class PaymentInfoController {
 		impl.firstTimeSetup();
 	}
 	
+	@RequestMapping("/transactions/paid")
+	public List<Payment> paidTransactions() {
+		return impl.paidTransactions();
+	}
+	
+	@RequestMapping("/transactions/in")
+	public List<Payment> incomingPayments() {
+		return impl.incomingPayments();
+	}
+	
 	@RequestMapping("/{id}/{transactionid}/{status}")
 	public Payment updateStatus(@PathVariable String id, @PathVariable String transactionid, @PathVariable String status) {
 		return impl.updateStatus(id, transactionid, status);

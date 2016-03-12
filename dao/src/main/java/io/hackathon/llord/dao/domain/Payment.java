@@ -13,6 +13,7 @@ public class Payment {
 	private String reference;
 	private String status;
 	private String image;
+	private String direction;
 	
 	private long amount;
 	private String currency;	
@@ -24,7 +25,7 @@ public class Payment {
 		
 	}
 
-	public Payment(String firstName, String lastName, String address, String reference, String status, String image, long amount, String currency,
+	public Payment(String firstName, String lastName, String address, String reference, String status, String image, String direction, long amount, String currency,
 			long requestDate) {
 		super();
 		this.firstName = firstName;
@@ -33,11 +34,16 @@ public class Payment {
 		this.reference = reference;
 		this.status = status;
 		this.image = image;
+		this.direction = direction;
 		this.amount = amount;
 		this.currency = currency;
 		this.requestDate = requestDate;
 		this.paidDate = 0l;
 		this.transactionId = "";
+	}
+
+	public String getDirection() {
+		return direction;
 	}
 
 	public String getTransactionId() {
@@ -96,9 +102,9 @@ public class Payment {
 	@Override
 	public String toString() {
 		return "Payment [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
-				+ ", reference=" + reference + ", status=" + status + ", image=" + image + ", amount=" + amount
-				+ ", currency=" + currency + ", requestDate=" + requestDate + ", paidDate=" + paidDate
-				+ ", transactionId=" + transactionId + "]";
+				+ ", reference=" + reference + ", status=" + status + ", image=" + image + ", direction=" + direction
+				+ ", amount=" + amount + ", currency=" + currency + ", requestDate=" + requestDate + ", paidDate="
+				+ paidDate + ", transactionId=" + transactionId + "]";
 	}
 
 }
