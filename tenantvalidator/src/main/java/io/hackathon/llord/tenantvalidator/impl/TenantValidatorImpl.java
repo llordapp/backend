@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.TreeTraversingParser;
 import com.veridu.sdk.Request;
 import com.veridu.sdk.Session;
 import com.veridu.sdk.UserDetails;
@@ -91,7 +89,7 @@ public class TenantValidatorImpl {
 		property3 = propertyRepository.save(property3);				
 	}
 	
-	public VeriduResponse veridu() {
+	public UserDetails veridu() {
 		Request veriduRequest = new Request(Settings.CLIENT, Settings.SECRET);
         veriduRequest.setVersion("0.3");
         Session veriduSession = new Session(veriduRequest);
@@ -130,25 +128,7 @@ public class TenantValidatorImpl {
         }
         
         JSONObject userDetails = veriduRequest.fetchResource("GET", "/details/gw_56e3c4eb2bf44767512946/", null);
-        UserDetails details = null;
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-        	details = mapper.readValue(userDetails.toString(), UserDetails.class);
-		} catch (JsonParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-        if (details != null) {
-        	System.out.println("hooray");
-        }
-        
+
         if (userDetails.isEmpty()) {
             System.err.println("Error: /kba/gw_56e3c4eb2bf44767512946 returned an empty response!");
         } else {
@@ -167,9 +147,10 @@ public class TenantValidatorImpl {
             System.err.printf("Error: %s\n", veriduSession.lastError());
         }
         
-        return MapVeriduResponse(userOTP);
+        return null;
 	}
 
+	/*
 	private VeriduResponse MapVeriduResponse(JSONObject userOTP) 
 	{
 		if (userOTP == null)
@@ -178,6 +159,8 @@ public class TenantValidatorImpl {
 		}
 		
 		VeriduResponse response = new VeriduResponse();
+		JSONObject overall = userOTP.
 		return response;
 	}
+	*/
 }

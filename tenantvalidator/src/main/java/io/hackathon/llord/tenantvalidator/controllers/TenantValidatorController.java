@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.veridu.sdk.UserDetails;
+
 import io.hackathon.llord.dao.domain.Property;
 import io.hackathon.llord.dao.domain.Tenant;
 import io.hackathon.llord.tenantvalidator.impl.TenantValidatorImpl;
-import io.hackathon.llord.tenantvalidator.impl.VeriduResponse;
 
 @RestController
 public class TenantValidatorController {
@@ -36,7 +37,7 @@ public class TenantValidatorController {
 	}
 
 	@RequestMapping("/veridu")
-	public VeriduResponse veridu() {
+	public UserDetails veridu() {
 		return impl.veridu();
 	}
 }
