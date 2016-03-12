@@ -38,6 +38,13 @@ public class PaymentInfoImpl {
 	public Payment findPaymentsById(String id) {
 		return paymentRepository.findPaymentById(id);
 	}
+	
+	public Payment updateStatus(String id, String status) {
+		Payment payment = paymentRepository.findPaymentById(id);
+		payment.update(status);
+		
+		return paymentRepository.save(payment);
+	}
 
 	public void firstTimeSetup() {
 		paymentRepository.deleteAll();

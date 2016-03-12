@@ -40,6 +40,10 @@ public class Payment {
 		this.paidDate = null;
 	}
 
+	public void update(String status) {
+		this.status = status;
+	}
+
 	public String getImage() {
 		return image;
 	}
