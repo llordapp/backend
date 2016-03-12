@@ -104,8 +104,12 @@ public class TenantValidatorImpl {
             System.out.println("URL: ".concat(redir.generateUrl(username)));
             // redirect token id for callback validation
             System.out.println("TID: ".concat(redir.getTokenId()));
-        } catch (UnsupportedEncodingException | JoseException ex) {
-           	ex.printStackTrace();
-        }
+        } catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JoseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
