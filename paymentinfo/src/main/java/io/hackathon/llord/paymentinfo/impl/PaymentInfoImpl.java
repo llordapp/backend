@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import io.hackathon.llord.dao.domain.Payment;
-import io.hackathon.llord.dao.repositories.PaymentRepository;
+import io.hackathon.llord.paymentinfo.repositories.PaymentRepository;
 
 public class PaymentInfoImpl {
 

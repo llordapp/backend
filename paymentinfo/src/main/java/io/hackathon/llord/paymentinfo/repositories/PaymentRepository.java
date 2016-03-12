@@ -1,4 +1,4 @@
-package io.hackathon.llord.dao.repositories;
+package io.hackathon.llord.paymentinfo.repositories;
 
 import java.util.List;
 
