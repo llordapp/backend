@@ -9,7 +9,7 @@ import io.hackathon.llord.dao.domain.Payment;
 
 @Repository
 public interface PaymentRepository extends MongoRepository<Payment, String> {
-	
 	public Payment findPaymentById(String id);
+	public List<Payment> findAllByStatus(String status);
 	public List<Payment> findAll();
 }
