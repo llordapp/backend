@@ -1,14 +1,21 @@
 package io.hackathon.llord.tenantvalidator.impl;
 
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.jose4j.lang.JoseException;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.veridu.gateway.sdk.Redirect;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.TreeTraversingParser;
+import com.veridu.sdk.Request;
+import com.veridu.sdk.Session;
+import com.veridu.sdk.UserDetails;
 
 import io.hackathon.llord.dao.domain.Property;
 import io.hackathon.llord.dao.domain.Tenant;
@@ -85,22 +92,79 @@ public class TenantValidatorImpl {
 	}
 	
 	public void veridu() {
-		try {
-			Redirect redir = new Redirect(Settings.CLIENT, Settings.SECRET);
-            // Unique username assigned by your system (this is an optional parameter for redir.generateUrl)
-            // more info: https://veridu.com/wiki/User_ID
-            String username = "unique-user-id";
-
-            // generate redirect url with appended signature (username parameter is optional)
-            System.out.println("URL: ".concat(redir.generateUrl(username)));
-            // redirect token id for callback validation
-            System.out.println("TID: ".concat(redir.getTokenId()));
-        } catch (UnsupportedEncodingException e) {
+		Request veriduRequest = new Request(Settings.CLIENT, Settings.SECRET);
+        veriduRequest.setVersion("0.3");
+        Session veriduSession = new Session(veriduRequest);
+        if (!veriduSession.Create(false)) {
+            System.err.println("Failed to create session!");
+            System.err.printf("Error: %s\n", veriduSession.lastError());
+            return;
+        }
+        if (!veriduSession.Assign("gw_56e3c4eb2bf44767512946")) {
+            System.err.println("Failed to create/assign user!");
+            System.err.printf("Error: %s\n", veriduSession.lastError());
+            return;
+        }
+        if (!veriduSession.Extend()) {
+            System.err.println("Failed to extend session!");
+            System.err.printf("Error: %s\n", veriduSession.lastError());
+            return;
+        }
+        JSONObject userData = veriduRequest.fetchResource("GET", "/user/gw_56e3c4eb2bf44767512946/", null);
+        if (userData.isEmpty()) {
+            System.err.println("Error: /user/gw_56e3c4eb2bf44767512946 returned an empty response!");
+        } else {
+            System.out.println(userData.toJSONString());
+        }
+        JSONObject userProviders = veriduRequest.fetchResource("GET", "/provider/gw_56e3c4eb2bf44767512946/", null);
+        if (userProviders.isEmpty()) {
+            System.err.println("Error: /provider/gw_56e3c4eb2bf44767512946 returned an empty response!");
+        } else {
+            System.out.println(userProviders.toJSONString());
+        }
+        JSONObject userKBA = veriduRequest.fetchResource("GET", "/kba/gw_56e3c4eb2bf44767512946/", null);
+        if (userKBA.isEmpty()) {
+            System.err.println("Error: /kba/gw_56e3c4eb2bf44767512946 returned an empty response!");
+        } else {
+            System.out.println(userKBA.toJSONString());
+        }
+        
+        JSONObject userDetails = veriduRequest.fetchResource("GET", "/details/gw_56e3c4eb2bf44767512946/", null);
+        UserDetails details = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+        	details = mapper.readValue(userDetails.toString(), UserDetails.class);
+		} catch (JsonParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (JoseException e) {
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        
+        if (details != null) {
+        	System.out.println("hooray");
+        }
+        
+        if (userDetails.isEmpty()) {
+            System.err.println("Error: /kba/gw_56e3c4eb2bf44767512946 returned an empty response!");
+        } else {
+            System.out.println(userDetails.toJSONString());
+        }
+        
+        
+        JSONObject userOTP = veriduRequest.fetchResource("GET", "/otp/gw_56e3c4eb2bf44767512946/", null);
+        if (userOTP.isEmpty()) {
+            System.err.println("Error: /otp/gw_56e3c4eb2bf44767512946 returned an empty response!");
+        } else {
+            System.out.println(userOTP.toJSONString());
+        }
+        if (!veriduSession.Expire()) {
+            System.err.println("Failed to expire session!");
+            System.err.printf("Error: %s\n", veriduSession.lastError());
+        }
 	}
 }
