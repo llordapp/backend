@@ -30,7 +30,7 @@ public class TenantValidatorController {
 //		return impl.findProperty(address);
 //	}
 	
-	@RequestMapping("/property/tenants/{id}")
+	@RequestMapping("/property/tenants/")
 	public List<Tenant> findAllTenants() {
 		System.out.println("Finding all tenants");
 		return impl.findAllTenants();

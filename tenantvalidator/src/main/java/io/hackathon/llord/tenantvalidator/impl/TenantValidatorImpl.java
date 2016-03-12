@@ -1,6 +1,7 @@
 package io.hackathon.llord.tenantvalidator.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -34,8 +35,21 @@ public class TenantValidatorImpl {
 	public List<Tenant> findAllTenants()
 	{
 		List<Property> properties = propertyRepository.findAll();
-		//HashSet<String> tenants =
-		return new ArrayList<Tenant>();
+		HashMap<String, Tenant> tenants = new HashMap<String, Tenant>();
+		for(Property property : properties)
+		{
+			if (property == null)
+				continue;
+			
+			for(Tenant tenant : property.getTenants())
+			{
+				if (!tenants.containsKey(tenant.getFirstName() + " " + tenant.getLastName()))
+				{
+					tenants.put(tenant.getFirstName() + " " + tenant.getLastName(), tenant);
+				}
+			}
+		}
+		return (List<Tenant>) tenants.values();
 	}
 	
 	public List<Tenant> findTenantsInProperty(String propertyId) {
