@@ -15,7 +15,7 @@ public class Payment {
 	private String reference;
 	private String status;
 	
-	private double amount;
+	private long amount;
 	private String currency;
 	private LocalDateTime requestDate;
 	
@@ -23,7 +23,7 @@ public class Payment {
 		
 	}
 
-	public Payment(String firstName, String lastName, String address, String reference, String status, double amount, String currency,
+	public Payment(String firstName, String lastName, String address, String reference, String status, long amount, String currency,
 			LocalDateTime requestDate) {
 		super();
 		this.firstName = firstName;
@@ -60,7 +60,7 @@ public class Payment {
 		return address;
 	}
 
-	public double getAmount() {
+	public long getAmount() {
 		return amount;
 	}
 

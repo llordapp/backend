@@ -7,11 +7,12 @@ public class TransactionData {
 	private String transactionId;
 	private String paymentInfoId;
 	private String expiryDate;
+	private String cardNumber;
 	private String type;
 	private String cardHolderName;
 	private String cvn;
 	private boolean cvnPresent;
-	private double amount;
+	private long amount;
 	private String currency;
 
 	public String getTransactionId() {
@@ -24,6 +25,10 @@ public class TransactionData {
 
 	public String getExpiryDate() {
 		return expiryDate;
+	}
+
+	public String getCardNumber() {
+		return cardNumber;
 	}
 
 	public String getType() {
@@ -42,7 +47,7 @@ public class TransactionData {
 		return cvnPresent;
 	}
 
-	public double getAmount() {
+	public long getAmount() {
 		return amount;
 	}
 
@@ -50,17 +55,28 @@ public class TransactionData {
 		return currency;
 	}
 
-	public TransactionData(String paymentInfoId, String expiryDate,
+	public TransactionData(String paymentInfoId, String expiryDate, String cardNumber,
 			String type, String cardHolderName, String cvn, boolean cvnPresent,
-			double amount, String currency) {
+			long amount, String currency) {
 		super();
 		this.paymentInfoId = paymentInfoId;
 		this.expiryDate = expiryDate;
+		this.cardNumber = cardNumber;
 		this.type = type;
 		this.cardHolderName = cardHolderName;
 		this.cvn = cvn;
 		this.cvnPresent = cvnPresent;
 		this.amount = amount;
 		this.currency = currency;
+	}
+
+	@Override
+	public String toString() {
+		return "TransactionData [transactionId=" + transactionId
+				+ ", paymentInfoId=" + paymentInfoId + ", expiryDate="
+				+ expiryDate + ", cardNumber=" + cardNumber + ", type=" + type
+				+ ", cardHolderName=" + cardHolderName + ", cvn=" + cvn
+				+ ", cvnPresent=" + cvnPresent + ", amount=" + amount
+				+ ", currency=" + currency + "]";
 	}
 }
