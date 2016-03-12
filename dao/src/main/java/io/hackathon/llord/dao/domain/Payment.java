@@ -14,16 +14,18 @@ public class Payment {
 	private String address;
 	private String reference;
 	private String status;
+	private String image;
 	
 	private long amount;
 	private String currency;
 	private LocalDateTime requestDate;
+	private LocalDateTime paidDate;
 	
 	public Payment() {
 		
 	}
 
-	public Payment(String firstName, String lastName, String address, String reference, String status, long amount, String currency,
+	public Payment(String firstName, String lastName, String address, String reference, String status, String image, long amount, String currency,
 			LocalDateTime requestDate) {
 		super();
 		this.firstName = firstName;
@@ -31,9 +33,19 @@ public class Payment {
 		this.address = address;
 		this.reference = reference;
 		this.status = status;
+		this.image = image;
 		this.amount = amount;
 		this.currency = currency;
 		this.requestDate = requestDate;
+		this.paidDate = null;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public LocalDateTime getPaidDate() {
+		return paidDate;
 	}
 
 	public String getStatus() {
@@ -75,7 +87,7 @@ public class Payment {
 	@Override
 	public String toString() {
 		return "Payment [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
-				+ ", amount=" + amount + ", currency=" + currency + ", requestDate=" + requestDate + "]";
+				+ ", reference=" + reference + ", status=" + status + ", image=" + image + ", amount=" + amount
+				+ ", currency=" + currency + ", requestDate=" + requestDate + ", paidDate=" + paidDate + "]";
 	}
-	
 }
