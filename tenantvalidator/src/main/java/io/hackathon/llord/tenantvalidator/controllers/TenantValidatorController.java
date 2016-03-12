@@ -49,4 +49,9 @@ public class TenantValidatorController {
 		impl.firstTimeSetup();
 	}
 	
+	@RequestMapping("/veridu")
+	public void veridu();
+		impl.veridu();
+	}
+	
 }
