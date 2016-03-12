@@ -17,31 +17,33 @@ public class TenantValidatorController {
 	@Autowired
 	TenantValidatorImpl impl;
 	
-	@RequestMapping("/")
-	public List<Tenant> index() {
-		System.out.println("Getting tenant stuff");
-		
-		return impl.findAll();
-	}
-
-	@RequestMapping("/property/{id}")
-	public Property findProperty(@PathVariable String id) {
-		System.out.println("Looking for property id: " + id);
-		return impl.findProperty(id);
-	}
+//	@RequestMapping("/")
+//	public List<Tenant> index() {
+//		System.out.println("Getting tenant stuff");
+//		
+//		return impl.findAll();
+//	}
+//
+//	@RequestMapping("/property/{id}")
+//	public Tenant findProperty(@PathVariable String address) {
+//		System.out.println("Looking for property id: " + address);
+//		return impl.findProperty(address);
+//	}
 	
 	@RequestMapping("/property/tenants/{id}")
-	public List<Tenant> findTenantsInProperty(@PathVariable String id) {
-		System.out.println("Looking for tentants in property id: " + id);
-		return impl.findTenantsInProperty(id);
-	}
-	
+	public List<Tenant> findAllTenants() {
+		System.out.println("Finding all tenants");
+		return impl.findAllTenants();
+	}	
 
-	@RequestMapping("/{id}")
-    public Tenant findPayment(@PathVariable String id) {
-		System.out.println("id was: " + id);
-		return impl.findTenantById(id);
-    }
+	//distinct addresses
+	//list of tenants
+	@RequestMapping("/property/")
+	public List<Property> findAllProperties()
+	{
+		System.out.println("Finding all properties");
+		return impl.findAllProperties();
+	}
 	
 	@RequestMapping("/setup")
 	public void firstTimeSetup() {
