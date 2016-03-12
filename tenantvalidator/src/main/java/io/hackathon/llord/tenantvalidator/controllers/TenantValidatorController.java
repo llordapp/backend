@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.hackathon.llord.dao.domain.Property;
 import io.hackathon.llord.dao.domain.Tenant;
 import io.hackathon.llord.tenantvalidator.impl.TenantValidatorImpl;
+import io.hackathon.llord.tenantvalidator.impl.VeriduResponse;
 
 @RestController
 public class TenantValidatorController {
@@ -22,8 +23,6 @@ public class TenantValidatorController {
 		return impl.findAllTenants();
 	}
 
-	// distinct addresses
-	// list of tenants
 	@RequestMapping("/property")
 	public List<Property> findAllProperties() {
 		System.out.println("Finding all properties");
@@ -37,7 +36,7 @@ public class TenantValidatorController {
 	}
 
 	@RequestMapping("/veridu")
-	public void veridu() {
-		impl.veridu();
+	public VeriduResponse veridu() {
+		return impl.veridu();
 	}
 }

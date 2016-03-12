@@ -91,24 +91,24 @@ public class TenantValidatorImpl {
 		property3 = propertyRepository.save(property3);				
 	}
 	
-	public void veridu() {
+	public VeriduResponse veridu() {
 		Request veriduRequest = new Request(Settings.CLIENT, Settings.SECRET);
         veriduRequest.setVersion("0.3");
         Session veriduSession = new Session(veriduRequest);
         if (!veriduSession.Create(false)) {
             System.err.println("Failed to create session!");
             System.err.printf("Error: %s\n", veriduSession.lastError());
-            return;
+            return null;
         }
         if (!veriduSession.Assign("gw_56e3c4eb2bf44767512946")) {
             System.err.println("Failed to create/assign user!");
             System.err.printf("Error: %s\n", veriduSession.lastError());
-            return;
+            return null;
         }
         if (!veriduSession.Extend()) {
             System.err.println("Failed to extend session!");
             System.err.printf("Error: %s\n", veriduSession.lastError());
-            return;
+            return null;
         }
         JSONObject userData = veriduRequest.fetchResource("GET", "/user/gw_56e3c4eb2bf44767512946/", null);
         if (userData.isEmpty()) {
@@ -166,5 +166,18 @@ public class TenantValidatorImpl {
             System.err.println("Failed to expire session!");
             System.err.printf("Error: %s\n", veriduSession.lastError());
         }
+        
+        return MapVeriduResponse(userOTP);
+	}
+
+	private VeriduResponse MapVeriduResponse(JSONObject userOTP) 
+	{
+		if (userOTP == null)
+		{
+			return null;
+		}
+		
+		VeriduResponse response = new VeriduResponse();
+		return response;
 	}
 }
