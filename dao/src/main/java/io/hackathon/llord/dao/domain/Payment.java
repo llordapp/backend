@@ -17,16 +17,16 @@ public class Payment {
 	private String image;
 	
 	private long amount;
-	private String currency;
-	private LocalDateTime requestDate;
-	private LocalDateTime paidDate;
+	private String currency;	
+	private long requestDate;
+	private long paidDate;
 	
 	public Payment() {
 		
 	}
 
 	public Payment(String firstName, String lastName, String address, String reference, String status, String image, long amount, String currency,
-			LocalDateTime requestDate) {
+			long requestDate) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -37,7 +37,7 @@ public class Payment {
 		this.amount = amount;
 		this.currency = currency;
 		this.requestDate = requestDate;
-		this.paidDate = null;
+		this.paidDate = 0l;
 	}
 
 	public void update(String status) {
@@ -48,7 +48,7 @@ public class Payment {
 		return image;
 	}
 
-	public LocalDateTime getPaidDate() {
+	public long getPaidDate() {
 		return paidDate;
 	}
 
@@ -84,7 +84,7 @@ public class Payment {
 		return currency;
 	}
 
-	public LocalDateTime getRequestDate() {
+	public long getRequestDate() {
 		return requestDate;
 	}
 

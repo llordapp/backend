@@ -1,7 +1,9 @@
 package io.hackathon.llord.dao.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "transactiondata")
 public class TransactionData {
 	@Id
 	private String transactionId;
